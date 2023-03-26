@@ -16,7 +16,7 @@ public:
     TInterface(QWidget *parent = nullptr);
     ~TInterface();
 public slots:
-    void inputValues();
+//    void inputValues();
 //    void transpose();
 //    void rank();
 //    void determinant();

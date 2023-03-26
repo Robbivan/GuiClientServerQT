@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QCoreApplication>
-
+#include "matrix.h"
 #include "communicator.h"
 
 class TApplication : public QCoreApplication
@@ -15,6 +15,8 @@ class TApplication : public QCoreApplication
 public:
 
     TApplication(int, char**);
+private:
+     MatrixSquare matrix;
 
 signals:
 

@@ -24,17 +24,17 @@ AddValueMatrixDialog::AddValueMatrixDialog(QWidget *parent) :
 }
 
 void AddValueMatrixDialog::accept(){
-//    if (size == 0 || size * size != arrNums.size()) {
-//        QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Не до конца введены данные!!!"));
-//        return;
-//    }
+    if (size == 0 || size * size != arrNums.size()) {
+        QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Не до конца введены данные!!!"));
+        return;
+    }
 
     QDialog::accept();
 }
 
-//std::vector<number> AddValueMatrixDialog::getVector() {
-//    return arrNums;
-//}
+std::vector<std::pair<int,int>> AddValueMatrixDialog::getVector() {
+    return arrNums;
+}
 
 size_t AddValueMatrixDialog::getSize() {
     return size;
@@ -53,7 +53,7 @@ void AddValueMatrixDialog::inputSize() {
         QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Размер не может быть равен 0!!!"));
         return;
     }
-//    arrNums.reserve(size * size);
+    arrNums.reserve(size * size);
     ui->numeratorLineEdit->setEnabled(true);
     ui->dividerLineEdit->setEnabled(true);
     ui->nextValueButton->setEnabled(true);
@@ -66,7 +66,7 @@ void AddValueMatrixDialog::inputSize() {
 void AddValueMatrixDialog::addValue() {
     int div = ui->dividerLineEdit->text().toInt(),
         num = ui->numeratorLineEdit->text().toInt();
-    size_t cur_size = 0; // TODO...............................................
+    size_t cur_size = arrNums.size();
     bool is_neg = ui->isNegativeCheckBox->isChecked();
 
     if (size * size == cur_size) {
@@ -77,7 +77,7 @@ void AddValueMatrixDialog::addValue() {
         QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Число не может делиться на ноль!!!"));
         return;
     }
-//    arrNums.emplace_back(is_neg ? -num : num, div);
+    arrNums.emplace_back(is_neg ? -num : num, div);
     ++cur_size;
     ui->dividerLineEdit->clear();
     ui->numeratorLineEdit->clear();

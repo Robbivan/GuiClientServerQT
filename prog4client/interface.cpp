@@ -1,4 +1,5 @@
 #include "interface.h"
+#include "common.h"
 #include "ui_interface.h"
 
 #include <QPushButton>
@@ -12,13 +13,13 @@ TInterface::TInterface(QWidget *parent)
     ui->setupUi(this);
     setWindowTitle(QStringLiteral("Лучшая прога для матрицы!!!"));
     connect(ui->inputValueButton, &QPushButton::clicked,
-            this, &TInterface::inputValues);
-//    connect(ui->calcDeterminantButton, &QPushButton::clicked,
-//            this, &TInterface::determinant);
-//    connect(ui->calcRangButton, &QPushButton::clicked,
-//            this, &TInterface::rank);
-//    connect(ui->outputTransposeButton, &QPushButton::clicked,
-//            this, &TInterface::transpose);
+            this, &TInterface::formRequest);
+    connect(ui->calcDeterminantButton, &QPushButton::clicked,
+            this, &TInterface::formRequest);
+    connect(ui->calcRangButton, &QPushButton::clicked,
+            this, &TInterface::formRequest);
+    connect(ui->outputTransposeButton, &QPushButton::clicked,
+            this, &TInterface::formRequest);
 
 //    updateMatrix();
 }
@@ -27,13 +28,13 @@ TInterface::~TInterface() {
     delete ui;
 }
 
-void TInterface::inputValues() {
+//void TInterface::inputValues() {
 //    AddValueMatrixDialog dialog(this);
 //    if (dialog.exec() == QDialog::Accepted) {
-//        matr = MatrixSquare(dialog.getSize(), dialog.getVector());
+////        matr = MatrixSquare(dialog.getSize(), dialog.getVector());
 //    }
-//    updateMatrix();
-}
+////    updateMatrix();
+//}
 
 //void TInterface::determinant() {
 //    QMessageBox msg(this);
@@ -69,19 +70,37 @@ void TInterface::inputValues() {
 
 void TInterface::formRequest()
 {
-//    QString msg;
-//    msg << a_re->text() << a_im->text();
-//    msg << b_re->text() << b_im->text();
-//    msg << c_re->text() << c_im->text();
-//    QPushButton btn = (QPushButton)sender();
-//    if (btn == value_btn)
-//    {
-//        msg << QString().setNum(VALUE_REQUEST);
-//        msg << x_re->text() << x_im->text();
-//    }
-//    if (btn == print_classic_btn)
-//        msg << QString().setNum(PRINT_CLASSIC_REQUEST);
-//    emit request(msg);
+    QString msg;
+
+    QPushButton *btn = static_cast<QPushButton*>(sender());
+    if (btn == ui->inputValueButton)
+    {
+        msg <<  QString().setNum(INPUT_VALUE_REQUEST);
+        AddValueMatrixDialog dialog(this);
+        if (dialog.exec() != QDialog::Accepted) {
+            return;
+        }
+        auto arrNums = dialog.getVector();
+        msg << QString().setNum(dialog.getSize());
+        for(const auto& num:arrNums){
+            msg << QString().setNum(num.first) << QString().setNum(num.second);
+        }
+
+    }
+    else if(btn == ui->calcDeterminantButton){
+        msg <<  QString().setNum(DETERMINANT_REQUEST);
+    }
+    else if(btn == ui->calcRangButton){
+          msg <<  QString().setNum(RANK_REQUEST);
+    }
+    else if(btn == ui->outputTransposeButton){
+         msg <<  QString().setNum(TRANSPOSE_REQUEST);
+    }
+    else{
+        msg <<  QString().setNum(UPDATE_REQUEST);
+    }
+
+    emit request(msg);
 }
 
 void TInterface::answer(QString msg)

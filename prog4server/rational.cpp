@@ -1,4 +1,6 @@
 #include "rational.h"
+#include "common.h"
+QChar TRational::SEPARATOR = separator;
 
 TRational::TRational():num(0),div(1)
 {

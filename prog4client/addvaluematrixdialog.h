@@ -18,7 +18,7 @@ public:
     explicit AddValueMatrixDialog(QWidget *parent = nullptr);
     ~AddValueMatrixDialog();
 
-//    std::vector<number> getVector();
+    std::vector<std::pair<int,int>> getVector();
     size_t getSize();
 
 public slots:
@@ -28,7 +28,7 @@ private:
     QIntValidator *valNum, *valDiv, *valSize;
     Ui::AddValueMatrixDialog *ui;
     size_t size = 0;
-//    std::vector<number> arrNums;
+    std::vector<std::pair<int,int>> arrNums;
 protected:
     void accept() override;
 };
