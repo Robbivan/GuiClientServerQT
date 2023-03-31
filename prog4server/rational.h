@@ -2,7 +2,7 @@
 #define TRATIONAL_H
 #include <iostream>
 #include <QString>
-
+#include <QByteArray>
 
 class TRational
 {
@@ -11,6 +11,7 @@ public:
 
     TRational(int _num);
     TRational(int _num, int _div);
+    TRational(const QByteArray& arr);
     TRational(const TRational&) = default;
     TRational& operator =(const TRational& other) = default;
     TRational operator -() const;
@@ -39,7 +40,7 @@ public:
     friend std::istream& operator>>(std::istream& in, TRational& num);
 
     friend QString& operator<<(QString& out, const TRational& num);
-
+    friend QByteArray& operator>>(QByteArray& in, TRational& num);
 private:
     void algorithmEuclidian();
     int num, div;

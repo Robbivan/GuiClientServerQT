@@ -15,15 +15,37 @@ TApplication::TApplication(int argc, char *argv[])
 void TApplication::recieve(QByteArray msg)
 {
     QString answer, s;
-////    complex a, b, c, x, v;
-////    msg>>a>>b>>c;
-////    TPolinom p(a,b,c);
 
-//    int pos = msg.indexOf(separator.toLatin1());
-//    int t = msg.left(pos).toInt();
-//    switch (t)
-//    {
-//        case VALUE_REQUEST:
+    int pos = msg.indexOf(separator.toLatin1()), posSep;
+    int t = msg.left(pos).toInt();
+    size_t size;
+    std::vector<number> input;
+    number x;
+
+    switch (t)
+    {
+        case INPUT_VALUE_REQUEST:
+            msg = msg.right(msg.length() - (pos + 1));
+            size = msg.toInt();
+            msg = msg.right(1);
+            input.reserve(size);
+            for (size_t i = 0; i < size; ++i) {
+                posSep = msg.indexOf(separator.toLatin1());
+                msg >> x;
+            }
+            matrix = MatrixSquare(size, input);
+            break;
+        case UPDATE_REQUEST:
+            break;
+        case DETERMINANT_REQUEST:
+            break;
+        case RANK_REQUEST:
+            break;
+        case TRANSPOSE_REQUEST:
+            break;
+        default:
+            return;
+
 //            msg = msg.right(msg.length()-pos-1);
 //            msg>>x;
 //            v = p.value(x);
@@ -37,6 +59,6 @@ void TApplication::recieve(QByteArray msg)
 //            answer<<QString().setNum(PRINT_ANSWER)<<s;
 //            break;
 //        default: return;
-//    }
-//    comm->send(QByteArray().append(answer.toStdString()));
+    }
+    comm->send(QByteArray().append(answer.toStdString()));
 }

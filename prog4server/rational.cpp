@@ -122,3 +122,20 @@ void TRational::algorithmEuclidian(){
     }
 
 }
+
+TRational::TRational(const QByteArray& arr) {
+    int pos = arr.indexOf(SEPARATOR.toLatin1());
+    num = arr.left(pos).toInt();
+    div = arr.right(arr.length() - (pos + 1)).toInt();
+}
+
+QByteArray& operator>>(QByteArray& in, TRational& number) {
+    int pos = in.indexOf(TRational::SEPARATOR.toLatin1());
+    pos = in.indexOf(TRational::SEPARATOR.toLatin1(), pos + 1);
+    if (pos > 0) {
+        number = TRational(in.left(pos));
+        in = in.right(in.length() - (pos + 1));
+    }
+
+    return in;
+}

@@ -82,22 +82,22 @@ void TInterface::formRequest()
         }
         auto arrNums = dialog.getVector();
         msg << QString().setNum(dialog.getSize());
-        for(const auto& num:arrNums){
+        for (const auto& num:arrNums){
             msg << QString().setNum(num.first) << QString().setNum(num.second);
         }
 
     }
-    else if(btn == ui->calcDeterminantButton){
-        msg <<  QString().setNum(DETERMINANT_REQUEST);
+    else if (btn == ui->calcDeterminantButton){
+        msg << QString().setNum(DETERMINANT_REQUEST);
     }
-    else if(btn == ui->calcRangButton){
-          msg <<  QString().setNum(RANK_REQUEST);
+    else if (btn == ui->calcRangButton){
+          msg << QString().setNum(RANK_REQUEST);
     }
-    else if(btn == ui->outputTransposeButton){
-         msg <<  QString().setNum(TRANSPOSE_REQUEST);
+    else if (btn == ui->outputTransposeButton){
+         msg << QString().setNum(TRANSPOSE_REQUEST);
     }
     else{
-        msg <<  QString().setNum(UPDATE_REQUEST);
+        msg << QString().setNum(UPDATE_REQUEST);
     }
 
     emit request(msg);
