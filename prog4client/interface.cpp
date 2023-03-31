@@ -20,53 +20,14 @@ TInterface::TInterface(QWidget *parent)
             this, &TInterface::formRequest);
     connect(ui->outputTransposeButton, &QPushButton::clicked,
             this, &TInterface::formRequest);
-
-//    updateMatrix();
+    connect(ui->updateButton, &QPushButton::clicked,
+            this, &TInterface::formRequest);
 }
 
 TInterface::~TInterface() {
     delete ui;
 }
 
-//void TInterface::inputValues() {
-//    AddValueMatrixDialog dialog(this);
-//    if (dialog.exec() == QDialog::Accepted) {
-////        matr = MatrixSquare(dialog.getSize(), dialog.getVector());
-//    }
-////    updateMatrix();
-//}
-
-//void TInterface::determinant() {
-//    QMessageBox msg(this);
-//    msg.setWindowTitle(QStringLiteral("Ответ на запрос"));
-//    QString ans;
-//    ans << matr.determinant();
-//    msg.setText(QStringLiteral("Определитель матрицы равен ") + ans);
-//    msg.exec();
-//}
-
-//void TInterface::rank() {
-//    QMessageBox msg(this);
-//    msg.setWindowTitle(QStringLiteral("Ответ на запрос"));
-//    QString ans = QString().setNum(matr.rank());
-//    msg.setText(QStringLiteral("Ранг матрицы равен ") + ans);
-//    msg.exec();
-//}
-
-//void TInterface::transpose() {
-//    QMessageBox msg(this);
-//    msg.setWindowTitle(QStringLiteral("Ответ на запрос"));
-//    QString ans;
-//    ans << matr.transposed();
-//    msg.setText(QStringLiteral("Транспонированная матрица:\n") + ans);
-//    msg.exec();
-//}
-
-//void TInterface::updateMatrix() {
-//    QString label;
-//    label << matr;
-//    ui->curMatrix->setText(label);
-//}
 
 void TInterface::formRequest()
 {
@@ -96,7 +57,7 @@ void TInterface::formRequest()
     else if (btn == ui->outputTransposeButton){
          msg << QString().setNum(TRANSPOSE_REQUEST);
     }
-    else{
+    else {
         msg << QString().setNum(UPDATE_REQUEST);
     }
 
@@ -105,25 +66,31 @@ void TInterface::formRequest()
 
 void TInterface::answer(QString msg)
 {
-//    QString text;
-//    int p = msg.indexOf(separator);
-//    int t = msg.left(p).toInt();
-//    msg = msg.mid(p+1,msg.length()-p-2);
-//    switch (t)
-//    {
-//        case VALUE_ANSWER:
-//            text = "p";
-//            p = msg.indexOf(separator);
-//            text += msg.left(p);
-//            text += " = ";
-//            text += msg.right(msg.length()-p-1);
-//            output->setText(text);
-//            break;
-//        case PRINT_ANSWER:
-//            text = "p(x) = ";
-//            text += msg;
-//            output->setText(text);
-//            break;
-//        default: break;
-//    }
+    QString text;
+    int pos = msg.indexOf(separator);
+    if (pos == -1) {
+        QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Сервер не отвечает!"));
+        return;
+    }
+
+    int t = msg.left(pos).toInt(), pos2 = msg.indexOf(separator, pos + 1);
+    text = msg.mid(pos + 1, pos2 - (pos + 1));
+    QMessageBox msgBox(this);
+    switch (t)
+    {
+        case INPUT_VALUE_ANSWER:
+        case UPDATE_ANSWER:
+            ui->curMatrix->setText(text);
+            break;
+        case DETERMINANT_ANSWER:
+        case RANK_ANSWER:
+        case TRANSPOSE_ANSWER:
+            msgBox.setWindowTitle(QStringLiteral("Ответ на запрос"));
+            msgBox.setText(text);
+            msgBox.exec();
+            break;
+        default:
+            QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Сервер ответил неизвестной командой!"));
+            return;
+    }
 }

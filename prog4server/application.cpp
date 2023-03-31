@@ -18,47 +18,53 @@ void TApplication::recieve(QByteArray msg)
 
     int pos = msg.indexOf(separator.toLatin1()), posSep;
     int t = msg.left(pos).toInt();
-    size_t size;
+    int size;
     std::vector<number> input;
     number x;
+    QString tmp;
 
     switch (t)
     {
         case INPUT_VALUE_REQUEST:
             msg = msg.right(msg.length() - (pos + 1));
-            size = msg.toInt();
-            msg = msg.right(1);
+            pos = msg.indexOf(separator.toLatin1());
+            size = msg.left(pos).toInt();
+            msg = msg.right(msg.length() - (pos + 1));
+
             input.reserve(size);
-            for (size_t i = 0; i < size; ++i) {
+
+            for (size_t i = 0; i < size * size; ++i) {
                 posSep = msg.indexOf(separator.toLatin1());
                 msg >> x;
+                input.push_back(x);
             }
             matrix = MatrixSquare(size, input);
+            answer << QString().setNum(INPUT_VALUE_ANSWER);
+            tmp << matrix;
+            answer << tmp;
             break;
         case UPDATE_REQUEST:
+            answer << QString().setNum(UPDATE_ANSWER);
+            tmp << matrix;
+            answer << tmp;
             break;
         case DETERMINANT_REQUEST:
+            answer << QString().setNum(DETERMINANT_ANSWER);
+            tmp << matrix.determinant();
+            answer << (QStringLiteral("Определитель матрицы равен ") + tmp);
             break;
         case RANK_REQUEST:
+            answer << QString().setNum(DETERMINANT_ANSWER);
+            answer << (QStringLiteral("Ранг матрицы равен ") + QString().setNum(matrix.rank()));
             break;
         case TRANSPOSE_REQUEST:
+            tmp = QStringLiteral("Транспонированная матрица равна:\n");
+            tmp << matrix.transposed();
+            answer << QString().setNum(TRANSPOSE_ANSWER);
+            answer << tmp;
             break;
         default:
             return;
-
-//            msg = msg.right(msg.length()-pos-1);
-//            msg>>x;
-//            v = p.value(x);
-//            s<<(QString)x<<(QString)v;
-//            answer<<QString().setNum(VALUE_ANSWER);
-//            answer += s;
-//            break;
-//        case PRINT_CLASSIC_REQUEST:
-//            p.setPrintMode(EPrintModeClassic);
-//            s<<p;
-//            answer<<QString().setNum(PRINT_ANSWER)<<s;
-//            break;
-//        default: return;
     }
     comm->send(QByteArray().append(answer.toStdString()));
 }
