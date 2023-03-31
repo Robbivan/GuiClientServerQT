@@ -2,8 +2,7 @@
 #include "common.h"
 QChar TRational::SEPARATOR = separator;
 
-TRational::TRational():num(0),div(1)
-{
+TRational::TRational():num(0),div(1){
 
 }
 

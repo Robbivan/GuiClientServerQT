@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QString>
 
+
 class TRational
 {
 public:
@@ -42,6 +43,7 @@ public:
 private:
     void algorithmEuclidian();
     int num, div;
+    static QChar SEPARATOR;
 };
 
 #endif // TRATIONAL_H

@@ -14,7 +14,7 @@ TApplication::TApplication(int argc, char *argv[])
 
 void TApplication::recieve(QByteArray msg)
 {
-//    QString answer, s;
+    QString answer, s;
 ////    complex a, b, c, x, v;
 ////    msg>>a>>b>>c;
 ////    TPolinom p(a,b,c);
