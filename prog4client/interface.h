@@ -2,7 +2,7 @@
 #define TINTERFACE_H
 
 #include <QWidget>
-//#include "matrix.h"
+
 
 namespace Ui {
     class TInterface;
@@ -15,17 +15,9 @@ class TInterface : public QWidget
 public:
     TInterface(QWidget *parent = nullptr);
     ~TInterface();
-public slots:
-//    void inputValues();
-//    void transpose();
-//    void rank();
-//    void determinant();
 
 private:
     Ui::TInterface *ui;
-    //MatrixSquare matr;
-
-    //void updateMatrix();
 
 public slots:
     void answer(QString);

@@ -18,7 +18,6 @@ public:
 private:
      MatrixSquare matrix;
 
-signals:
 
 public slots:
 

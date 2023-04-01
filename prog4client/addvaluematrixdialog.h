@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QIntValidator>
 #include <vector>
-//#include "number.h"
+
 
 namespace Ui {
     class AddValueMatrixDialog;
