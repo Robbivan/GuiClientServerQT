@@ -7,7 +7,36 @@
 
 using std::size_t;
 
-class MatrixSquare
+
+class Matrix{
+public:
+    Matrix();
+    Matrix(size_t _size_row, size_t _size_col,  const std::vector<number>& init_numbers);
+
+    Matrix(const Matrix&);
+    Matrix(Matrix&&)noexcept=default;
+    Matrix& operator=(const Matrix&);
+    Matrix& operator=(Matrix&&)noexcept = default;
+    bool operator==(const Matrix&)const;
+
+    Matrix transposed()const;
+    size_t rank()const;
+
+    // return rank matrix
+    size_t gaus();
+
+    friend std::ostream& operator<<(std::ostream& out, const Matrix& matrix);
+    friend QString& operator<<(QString& out, const Matrix& matrix);
+
+protected:
+    size_t size_row;
+    size_t size_col;
+    std::unique_ptr<number[]> matrix;
+};
+
+
+
+class MatrixSquare:public Matrix
 {
 public:
     MatrixSquare();
@@ -17,20 +46,15 @@ public:
     MatrixSquare& operator=(const MatrixSquare&);
     MatrixSquare& operator=(MatrixSquare&&)noexcept = default;
     bool operator==(const MatrixSquare&)const;
+
+
     MatrixSquare transposed()const;
     number determinant()const;
-    size_t rank()const;
+
 
     friend std::ostream& operator<<(std::ostream& out, const MatrixSquare& matrix);
     friend QString& operator<<(QString& out, const MatrixSquare& matrix);
 
-private:
-    size_t size_matrix;
-    // smart pointers since C++11
-    std::unique_ptr<number[]> matrix;
-
-    // return rank matrix
-    size_t gaus();
 };
 
 
