@@ -19,11 +19,11 @@ public:
     Matrix& operator=(Matrix&&)noexcept = default;
     bool operator==(const Matrix&)const;
 
+
     Matrix transposed()const;
     size_t rank()const;
 
-    // return rank matrix
-    size_t gaus();
+
 
     friend std::ostream& operator<<(std::ostream& out, const Matrix& matrix);
     friend QString& operator<<(QString& out, const Matrix& matrix);
@@ -31,6 +31,8 @@ public:
 protected:
     size_t size_row;
     size_t size_col;
+    // return rank matrix
+    size_t gaus();
     std::unique_ptr<number[]> matrix;
 };
 
