@@ -16,7 +16,11 @@ public:
 
     TApplication(int, char**);
 private:
-    MatrixSquare matrix;
+
+
+    MatrixSquare<TRational> matrixRational;
+    MatrixSquare<double> matrixDouble;
+    MatrixSquare<TComplex> matrixComplex;
 
 
 public slots:

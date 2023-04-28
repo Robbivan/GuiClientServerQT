@@ -21,6 +21,7 @@ SOURCES += main.cpp \
     application.cpp \
     ../common/communicator.cpp \
     ../common/common.cpp \
+    complex.cpp \
     matrix.cpp \
     rational.cpp
 
@@ -28,6 +29,6 @@ HEADERS += \
     application.h \
     ../common/communicator.h \
     ../common/common.h \
+    complex.h \
     matrix.h \
-    number.h \
     rational.h

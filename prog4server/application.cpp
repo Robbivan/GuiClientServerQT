@@ -14,11 +14,14 @@ TApplication::TApplication(int argc, char *argv[])
 
 void TApplication::recieve(QByteArray msg)
 {
+    // if от галочки, так как в swicth нельзя определять val
     QString answer, s;
 
     int pos = msg.indexOf(separator.toLatin1()), posSep;
     int t = msg.left(pos).toInt();
     int size;
+
+    // тута TRational, double или Tcomplex
     std::vector<number> input;
     number x;
     QString tmp;
