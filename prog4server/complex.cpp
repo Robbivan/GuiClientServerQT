@@ -85,3 +85,30 @@ std::istream& operator>>(std::istream& in, TComplex& num) {
     in >> num.real >> num.image;
     return in;
 }
+
+QString& operator<<(QString& s, const TComplex& complex) {
+    s += QString().setNum(complex.real);
+    s += QStringLiteral(" + ");
+    s += QString().setNum(complex.image);
+    s += QStringLiteral("i");
+    return s;
+}
+
+QByteArray& operator>>(QByteArray& in, TComplex& number) {
+    int pos = in.indexOf(TComplex::SEPARATOR.toLatin1());
+    pos = in.indexOf(TComplex::SEPARATOR.toLatin1(), pos + 1);
+    if (pos > 0) {
+        number = TComplex(in.left(pos));
+        in = in.right(in.length() - (pos + 1));
+    }
+    return in;
+}
+
+TComplex::TComplex(const QByteArray& arr) {
+    int pos = arr.indexOf(SEPARATOR.toLatin1());
+    real = arr.left(pos).toDouble();
+    image = arr.right(arr.length() - (pos + 1)).toDouble();
+}
+
+
+
