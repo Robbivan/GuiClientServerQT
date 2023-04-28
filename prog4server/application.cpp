@@ -22,7 +22,7 @@ void TApplication::recieve(QByteArray msg)
     int size;
 
     // тута TRational, double или Tcomplex
-    std::vector<number> input;
+    std::vector<isnumber> input;
     number x;
     QString tmp;
 
