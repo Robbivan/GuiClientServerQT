@@ -127,6 +127,7 @@ TRational::TRational(const QByteArray& arr) {
     int pos = arr.indexOf(SEPARATOR.toLatin1());
     num = arr.left(pos).toInt();
     div = arr.right(arr.length() - (pos + 1)).toInt();
+    algorithmEuclidian();
 }
 
 QByteArray& operator>>(QByteArray& in, TRational& number) {
