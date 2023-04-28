@@ -15,7 +15,6 @@ TApplication::TApplication(int argc, char *argv[])
 
 QByteArray& operator>>(QByteArray& in, double& number) {
     int pos = in.indexOf(separator.toLatin1());
-    pos = in.indexOf(separator.toLatin1(), pos + 1);
 
     if (pos > 0) {
         number = in.left(pos).toDouble();

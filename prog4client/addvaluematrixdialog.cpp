@@ -13,6 +13,11 @@ AddValueMatrixDialog::AddValueMatrixDialog(QWidget *parent) :
     ui(new Ui::AddValueMatrixDialog)
 {
     ui->setupUi(this);
+    valReal->setLocale(QLocale::C);
+    valReal->setNotation(QDoubleValidator::ScientificNotation);
+
+    valImg->setLocale(QLocale::C);
+    valImg->setNotation(QDoubleValidator::ScientificNotation);
 
     ui->sizeLineEdit->setValidator(valSize);
 
@@ -148,6 +153,9 @@ void AddValueMatrixDialog::addValue() {
     size_t cur_size;
     bool is_neg;
 
+    QString str;
+    bool ok;
+
     switch(elem) {
         case IS_COMPLEX:
             real = ui->numeratorLineEdit->text().toDouble();
@@ -160,7 +168,11 @@ void AddValueMatrixDialog::addValue() {
             arrRationalNums.emplace_back(real, img);
             break;
         case IS_DOUBLE:
-            real = ui->numeratorLineEdit->text().toDouble();
+            str = ui->numeratorLineEdit->text();
+            real = str.toDouble(&ok);
+            if (!ok) {
+                real = real;
+            }
             cur_size = arrDoubleNums.size();
             if (size * size == cur_size) {
                 QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Все значения уже заполнены!"));
