@@ -4,7 +4,10 @@
 #include <QObject>
 #include <QCoreApplication>
 #include "matrix.h"
+#include "rational.h"
+#include "complex.h"
 #include "communicator.h"
+
 
 class TApplication : public QCoreApplication
 {

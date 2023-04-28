@@ -44,6 +44,8 @@ public:
     friend QString& operator<<(QString& out, const TComplex& num);
     friend QByteArray& operator>>(QByteArray& in, TComplex& num);
 
+
+
 private:
     double real, image;
 

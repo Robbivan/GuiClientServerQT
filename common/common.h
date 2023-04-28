@@ -11,7 +11,11 @@
 //    PRINT_CANONIC_REQUEST,
 //    PRINT_ANSWER,
 //};
-
+enum numbers {
+        IS_COMPLEX = 0,
+        IS_DOUBLE,
+        IS_RATIONAL
+};
 enum messages{
     INPUT_VALUE_REQUEST = 1,
     INPUT_VALUE_ANSWER,

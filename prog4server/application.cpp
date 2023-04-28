@@ -3,12 +3,6 @@
 #include "common.h"
 
 
-enum numbers {
-        IS_COMPLEX = 0,
-        IS_DOUBLE,
-        IS_RATIONAL
-};
-
 TApplication::TApplication(int argc, char *argv[])
             : QCoreApplication(argc,argv)
 {
@@ -101,6 +95,7 @@ void TApplication::recieve(QByteArray msg)
     int pos = msg.indexOf(separator.toLatin1());
     int flag = msg.left(pos).toInt();
 
+    msg = msg.right(msg.length() - (pos + 1));
     switch(flag){
         case IS_DOUBLE:
             inputValueRequest<double>(answer, msg, matrixDouble);
@@ -115,4 +110,5 @@ void TApplication::recieve(QByteArray msg)
             return;
     }
     comm->send(QByteArray().append(answer.toStdString()));
+
 }

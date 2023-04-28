@@ -1,4 +1,6 @@
 #include "complex.h"
+#include "common.h"
+QChar TComplex::SEPARATOR = separator;
 
 TComplex::TComplex() : real(0.), image(0.) {
 

@@ -123,7 +123,6 @@ void AddValueMatrixDialog::inputSize() {
     switch(elem) {
         case IS_COMPLEX:
             arrComplexNums.reserve(size * size);
-            ui->numeratorLineEdit->setEnabled(true);
             ui->dividerLineEdit->setEnabled(true);
             break;
         case IS_DOUBLE:
@@ -132,6 +131,7 @@ void AddValueMatrixDialog::inputSize() {
         case IS_RATIONAL:
             arrRationalNums.reserve(size * size);
             ui->isNegativeCheckBox->setEnabled(true);
+            ui->dividerLineEdit->setEnabled(true);
             break;
     }
 

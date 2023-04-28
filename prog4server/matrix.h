@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 #include <cstddef>
-#include "rational.h"
-#include "complex.h"
+#include <QString>
+#include <iostream>
 
 
 using std::size_t;
@@ -27,8 +27,14 @@ public:
 
 
 
-    friend std::ostream& operator<<(std::ostream& out, const Matrix& matrix);
-    friend QString& operator<<(QString& out, const Matrix& matrix);
+    template<typename V>
+    friend std::ostream& operator<<(std::ostream& out, const Matrix<V>& matrix);
+
+    template<typename V>
+    friend QString& operator<<(QString& out, const Matrix<V>& matrix);
+
+
+
 
 protected:
     size_t size_row;
@@ -59,9 +65,13 @@ public:
     MatrixSquare transposed()const;
     number determinant()const;
 
+    template<typename V>
+    friend std::ostream& operator<<(std::ostream& out, const MatrixSquare<V>& matrix);
 
-    friend std::ostream& operator<<(std::ostream& out, const MatrixSquare& matrix);
-    friend QString& operator<<(QString& out, const MatrixSquare& matrix);
+    template<typename V>
+    friend QString& operator<<(QString& out, const MatrixSquare<V>& matrix);
+
+
 
 };
 
