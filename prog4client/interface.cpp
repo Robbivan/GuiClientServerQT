@@ -36,28 +36,57 @@ void TInterface::formRequest()
     QPushButton *btn = static_cast<QPushButton*>(sender());
     if (btn == ui->inputValueButton)
     {
-        msg <<  QString().setNum(INPUT_VALUE_REQUEST);
         AddValueMatrixDialog dialog(this);
         if (dialog.exec() != QDialog::Accepted) {
             return;
         }
-        auto arrNums = dialog.getVector();
-        msg << QString().setNum(dialog.getSize());
-        for (const auto& num:arrNums){
-            msg << QString().setNum(num.first) << QString().setNum(num.second);
+
+        type = dialog.getType();
+        decltype(dialog.getVectorComplex()) arrComplexNums;
+        decltype(dialog.getVectorDouble()) arrDoubleNums;
+        decltype(dialog.getVectorRational()) arrRationalNums;
+
+        msg << QString().setNum(type);
+        msg << QString().setNum(INPUT_VALUE_REQUEST);
+        switch(type) {
+            case IS_COMPLEX:
+                arrComplexNums = dialog.getVectorComplex();
+                msg << QString().setNum(dialog.getSize());
+                for (const auto& num: arrComplexNums){
+                    msg << QString().setNum(num.first) << QString().setNum(num.second);
+                }
+                break;
+            case IS_DOUBLE:
+                arrDoubleNums = dialog.getVectorDouble();
+                msg << QString().setNum(dialog.getSize());
+                for (const auto& num: arrDoubleNums){
+                    msg << QString().setNum(num);
+                }
+                break;
+            case IS_RATIONAL:
+                arrRationalNums = dialog.getVectorRational();
+                msg << QString().setNum(dialog.getSize());
+                for (const auto& num: arrRationalNums){
+                    msg << QString().setNum(num.first) << QString().setNum(num.second);
+                }
+                break;
         }
 
     }
     else if (btn == ui->calcDeterminantButton){
+        msg << QString().setNum(type);
         msg << QString().setNum(DETERMINANT_REQUEST);
     }
     else if (btn == ui->calcRangButton){
-          msg << QString().setNum(RANK_REQUEST);
+        msg << QString().setNum(type);
+        msg << QString().setNum(RANK_REQUEST);
     }
     else if (btn == ui->outputTransposeButton){
-         msg << QString().setNum(TRANSPOSE_REQUEST);
+        msg << QString().setNum(type);
+        msg << QString().setNum(TRANSPOSE_REQUEST);
     }
     else {
+        msg << QString().setNum(type);
         msg << QString().setNum(UPDATE_REQUEST);
     }
 

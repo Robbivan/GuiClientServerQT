@@ -7,13 +7,38 @@
     <x>0</x>
     <y>0</y>
     <width>333</width>
-    <height>200</height>
+    <height>157</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QRadioButton" name="doubleButton">
+       <property name="text">
+        <string>Вещественные числа</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rationalButton">
+       <property name="text">
+        <string>Рациональные числа</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="complexButton">
+       <property name="text">
+        <string>Комлексные числа</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
@@ -24,6 +49,9 @@
       </widget>
      </item>
      <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3"/>
+     </item>
+     <item>
       <widget class="QLineEdit" name="sizeLineEdit"/>
      </item>
     </layout>
@@ -32,6 +60,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QPushButton" name="sizeButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Ввод размера матрицы</string>
        </property>
@@ -79,6 +110,13 @@
       <widget class="QLineEdit" name="dividerLineEdit">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="forComplexLabel">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>

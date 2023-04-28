@@ -2,7 +2,7 @@
 #define TINTERFACE_H
 
 #include <QWidget>
-
+#include "common.h"
 
 namespace Ui {
     class TInterface;
@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::TInterface *ui;
+    numbers type = IS_COMPLEX;
 
 public slots:
     void answer(QString);

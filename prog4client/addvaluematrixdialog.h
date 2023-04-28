@@ -5,6 +5,7 @@
 #include <QIntValidator>
 #include <vector>
 
+#include "common.h"
 
 namespace Ui {
     class AddValueMatrixDialog;
@@ -18,17 +19,32 @@ public:
     explicit AddValueMatrixDialog(QWidget *parent = nullptr);
     ~AddValueMatrixDialog();
 
-    std::vector<std::pair<int,int>> getVector();
+    std::vector<std::pair<int,int>> getVectorRational();
+    std::vector<std::pair<double,double>> getVectorComplex();
+    std::vector<double> getVectorDouble();
+
     size_t getSize();
+    numbers getType();
 
 public slots:
     void inputSize();
     void addValue();
+
+    void isRationalClick();
+    void isComlexClick();
+    void isDoubleClick();
+
 private:
+
+    numbers elem;
+
     QIntValidator *valNum, *valDiv, *valSize;
+    QDoubleValidator *valReal, *valImg;
     Ui::AddValueMatrixDialog *ui;
     size_t size = 0;
-    std::vector<std::pair<int,int>> arrNums;
+    std::vector<std::pair<int,int>> arrRationalNums;
+    std::vector<double> arrDoubleNums;
+    std::vector<std::pair<double,double>> arrComplexNums;
 protected:
     void accept() override;
 };
