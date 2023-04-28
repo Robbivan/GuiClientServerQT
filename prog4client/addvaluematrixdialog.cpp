@@ -150,8 +150,8 @@ void AddValueMatrixDialog::addValue() {
 
     switch(elem) {
         case IS_COMPLEX:
-            real = ui->dividerLineEdit->text().toDouble();
-            img = ui->numeratorLineEdit->text().toDouble();
+            real = ui->numeratorLineEdit->text().toDouble();
+            img = ui->dividerLineEdit->text().toDouble();
             cur_size = arrComplexNums.size();
             if (size * size == cur_size) {
                 QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Все значения уже заполнены!"));
@@ -160,7 +160,7 @@ void AddValueMatrixDialog::addValue() {
             arrRationalNums.emplace_back(real, img);
             break;
         case IS_DOUBLE:
-            real = ui->dividerLineEdit->text().toDouble();
+            real = ui->numeratorLineEdit->text().toDouble();
             cur_size = arrDoubleNums.size();
             if (size * size == cur_size) {
                 QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Все значения уже заполнены!"));
