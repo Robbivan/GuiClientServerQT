@@ -165,7 +165,7 @@ void AddValueMatrixDialog::addValue() {
                 QMessageBox::warning(this, QStringLiteral("ОШИБКА"), QStringLiteral("Все значения уже заполнены!"));
                return;
             }
-            arrRationalNums.emplace_back(real, img);
+            arrComplexNums.emplace_back(real, img);
             break;
         case IS_DOUBLE:
             str = ui->numeratorLineEdit->text();
