@@ -49,8 +49,6 @@ public:
 private:
     double real, image;
 
-    void algorithmEuclidian();
-
     static QChar SEPARATOR;
 
 };
